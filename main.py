@@ -1,22 +1,26 @@
-class Solution:
-    def __init__(self) -> None:
-        self.array = [2, 7, 11, 15]
+def longest_common_prefix(strings):
+    if not strings:
+        return ""
 
-    def Find(self, number):
-        index_dict = {}  # Dictionary to store elements and their indices
+    # Sort the strings to ensure that the shortest string comes first
+    strings.sort()
 
-        for i, elem in enumerate(self.array):
-            complement = number - elem
+    # Take the first and last strings after sorting
+    first_str, last_str = strings[0], strings[-1]
 
-            # Check if the complement is in the dictionary
-            if complement in index_dict:
-                return index_dict[complement], i  # Return the indices of the pair
+    common_prefix = []
 
-            # Add the current element and its index to the dictionary
-            index_dict[elem] = i
+    # Iterate through characters of the first and last strings
+    for i in range(len(first_str)):
+        if i < len(last_str) and first_str[i] == last_str[i]:
+            common_prefix.append(first_str[i])
+        else:
+            break
 
-        return "Not found"  # Return if no pair is found
+    return "".join(common_prefix)
 
 
-s = Solution()
-print(s.Find(26))
+# Example usage
+data = ["flower", "flow", "flight"]
+result = longest_common_prefix(data)
+print(f"The longest common prefix is: {result}")
